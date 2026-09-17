@@ -9,12 +9,10 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 const ADMIN_EMAIL = "exploiterwhite@gmail.com";
 
 const SERVICES = [
-  { id: "01", name: "Short-form Editing", desc: "Shorts, Reels & TikTok. Hook-first structure, tight sound design and pacing.", tag: "SPEED" },
-  { id: "02", name: "Long-form Editing", desc: "Full episodes and series. Multicam sync, narrative pruning and comedic timing.", tag: "SERIES" },
-  { id: "03", name: "Thumbnail Design", desc: "High CTR custom thumbnails, 3D renders, face expressions and eye-catching glow.", tag: "CLICK-THROUGH" },
-  { id: "04", name: "Plugin & Skript Dev", desc: "Custom server plugins, Skript automation, optimized code and zero lag.", tag: "MINECRAFT" },
-  { id: "05", name: "PvP & Skill Coaching", desc: "1v1 PvP mechanical teaching, movement techniques and competitive practice.", tag: "COACHING" },
-  { id: "06", name: "Custom Builds & Skins", desc: "High quality Minecraft skins, spawn builds, arena maps and detailed models.", tag: "CREATIVE" }
+  { id: "01", name: "Short-form editing", desc: "Shorts, Reels and TikTok. Hook-first structure, light sound design and pacing that survives the first swipe.", tag: "SPEED // 01" },
+  { id: "02", name: "Long-form editing", desc: "Full episodes and series. Multicam sync, narrative pruning, comedic timing and continuity across a season.", tag: "SERIES // 02" },
+  { id: "03", name: "Motion design", desc: "Typography, block wipes, map tracking, camera projection and HUD overlays built to match your channel.", tag: "GRAPHICS // 03" },
+  { id: "04", name: "Minecraft animation", desc: "Rigged characters, lit set-pieces, cinematic camera work and server reveal trailers rendered with shaders.", tag: "CINEMATIC // 04" }
 ];
 
 export default function Home() {
@@ -130,28 +128,28 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07060a] text-zinc-100 font-sans selection:bg-purple-500 selection:text-white">
-      {/* Top Navbar */}
-      <nav className="border-b border-zinc-800/80 bg-[#0a0810]/80 backdrop-blur-xl sticky top-0 z-40 px-6 py-4 flex justify-between items-center">
+    <div className="min-h-screen bg-[#07060a] text-zinc-100 font-sans antialiased selection:bg-purple-600 selection:text-white">
+      {/* Header / Navbar */}
+      <nav className="border-b border-zinc-800/60 bg-[#09070e]/80 backdrop-blur-md sticky top-0 z-40 px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center font-black text-xs tracking-tighter text-white shadow-lg shadow-purple-900/40">
-            AM
+          <div className="w-7 h-7 rounded bg-purple-600 flex items-center justify-center font-bold text-xs text-white glow-button">
+            K2
           </div>
-          <span className="font-bold tracking-widest text-sm uppercase text-zinc-200">AMETHYST PROD</span>
+          <span className="font-semibold tracking-wider text-xs uppercase text-zinc-200">KYRO PROD</span>
         </div>
 
-        <div>
+        <div className="flex items-center gap-3">
           {user ? (
             <div className="flex items-center gap-3">
-              <span className="text-xs text-zinc-400 bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-full">
-                {user.email} {isAdmin && <span className="text-purple-400 font-semibold">(Admin)</span>}
+              <span className="text-xs text-zinc-400 font-mono bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-md">
+                {user.email} {isAdmin && <span className="text-purple-400 font-bold">(ADMIN)</span>}
               </span>
-              <button onClick={() => supabase.auth.signOut()} className="text-xs bg-zinc-900 hover:bg-zinc-800 text-zinc-300 px-4 py-2 rounded-lg border border-zinc-800 transition">
+              <button onClick={() => supabase.auth.signOut()} className="text-xs bg-zinc-900 hover:bg-zinc-800 text-zinc-300 px-3 py-1.5 rounded-md border border-zinc-800 transition">
                 Sign Out
               </button>
             </div>
           ) : (
-            <button onClick={() => setIsAuthModalOpen(true)} className="bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold px-5 py-2.5 rounded-lg shadow-lg shadow-purple-600/20 transition">
+            <button onClick={() => setIsAuthModalOpen(true)} className="bg-purple-600 hover:bg-purple-500 text-white text-xs font-medium px-4 py-1.5 rounded-md glow-button transition">
               Sign In
             </button>
           )}
@@ -159,121 +157,152 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="max-w-6xl mx-auto px-6 pt-20 pb-16 text-left relative">
-        <div className="inline-flex items-center gap-2 bg-purple-950/40 border border-purple-800/50 text-purple-300 text-[11px] font-mono px-3 py-1 rounded-full mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse"></span>
+      <section className="max-w-5xl mx-auto px-6 pt-20 pb-16">
+        <div className="text-[11px] font-mono tracking-widest text-zinc-500 uppercase mb-3 flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
           MINECRAFT MEDIA PRODUCTION STUDIO
         </div>
         
-        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white max-w-3xl leading-[1.1]">
-          Edits that keep people <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">watching.</span>
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white max-w-2xl leading-tight">
+          Edits that keep people <span className="text-purple-400 glow-purple-text">watching.</span>
         </h1>
         
-        <p className="text-zinc-400 text-base max-w-xl mt-6 leading-relaxed">
-          Short-form, long-form, motion design, plugins and custom builds for Minecraft creators, servers, and gaming brands.
+        <p className="text-zinc-400 text-xs md:text-sm max-w-md mt-4 leading-relaxed">
+          Short-form, long-form, motion design and cinematics for Minecraft creators, servers and gaming brands.
         </p>
 
+        <div className="flex gap-3 mt-8">
+          <button className="bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold px-5 py-2.5 rounded-md glow-button transition">
+            SEE THE WORK →
+          </button>
+          <button onClick={() => !user && setIsAuthModalOpen(true)} className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 text-xs font-semibold px-5 py-2.5 rounded-md transition">
+            START A PROJECT
+          </button>
+        </div>
+
         {/* Stats Row */}
-        <div className="flex flex-wrap gap-12 mt-12 pt-8 border-t border-zinc-900">
+        <div className="grid grid-cols-3 gap-6 max-w-md mt-16 pt-8 border-t border-zinc-900">
           <div>
-            <p className="text-3xl font-extrabold text-white">5,000,000+</p>
-            <p className="text-xs text-zinc-500 font-mono mt-1 uppercase">Views Generated</p>
+            <p className="text-2xl font-bold text-white tracking-tight">5,000,000+</p>
+            <p className="text-[10px] text-zinc-500 font-mono mt-1 uppercase">VIEWS GENERATED</p>
           </div>
           <div>
-            <p className="text-3xl font-extrabold text-white">3.5+</p>
-            <p className="text-xs text-zinc-500 font-mono mt-1 uppercase">Years Editing</p>
+            <p className="text-2xl font-bold text-white tracking-tight">3.5+</p>
+            <p className="text-[10px] text-zinc-500 font-mono mt-1 uppercase">YEARS EDITING</p>
           </div>
           <div>
-            <p className="text-3xl font-extrabold text-white">99+</p>
-            <p className="text-xs text-zinc-500 font-mono mt-1 uppercase">Orders Delivered</p>
+            <p className="text-2xl font-bold text-white tracking-tight">99+</p>
+            <p className="text-[10px] text-zinc-500 font-mono mt-1 uppercase">ZONES DELIVERED</p>
           </div>
         </div>
       </section>
 
-      {/* Services Grid (Four ways we cut style) */}
-      <section className="max-w-6xl mx-auto px-6 py-12">
+      {/* Services Section */}
+      <section className="max-w-5xl mx-auto px-6 py-12">
         <div className="mb-8">
-          <p className="text-xs font-mono text-purple-400 uppercase tracking-widest">DISCIPLINES // 01</p>
-          <h2 className="text-3xl font-extrabold text-white mt-2">Six ways we elevate.</h2>
-          <p className="text-zinc-400 text-sm mt-1">Select any service to initiate a direct consultation pipeline.</p>
+          <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest">DISCIPLINES // 01</p>
+          <h2 className="text-3xl font-bold text-white mt-2">
+            Four ways we <span className="text-purple-400 glow-purple-text">cut.</span>
+          </h2>
+          <p className="text-zinc-400 text-xs mt-1">
+            Each discipline is its own pipeline, with its own reference library and its own delivery spec.
+          </p>
         </div>
 
+        {/* 2x2 Dark Grid Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {SERVICES.map((s) => (
             <div 
               key={s.id}
               onClick={() => handleServiceClick(s.name)}
-              className="group bg-[#0d0a14] border border-zinc-800/80 hover:border-purple-600/60 p-6 rounded-2xl cursor-pointer transition-all duration-300 relative overflow-hidden"
+              className="group bg-[#0b0912] border border-zinc-800/80 hover:border-purple-600/50 p-6 rounded-xl cursor-pointer transition-all duration-200 glow-purple-box relative"
             >
-              <div className="flex justify-between items-start mb-4">
-                <span className="text-xs font-mono text-zinc-600 group-hover:text-purple-400 transition">{s.id} // {s.tag}</span>
-                <span className="w-7 h-7 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-xs text-zinc-400 group-hover:bg-purple-600 group-hover:text-white transition">↗</span>
+              <div className="flex justify-between items-center mb-6">
+                <div className="w-8 h-8 rounded bg-purple-950/50 border border-purple-800/50 flex items-center justify-center text-purple-400 text-xs">
+                  ⚡
+                </div>
+                <span className="text-[10px] font-mono text-zinc-600 group-hover:text-purple-400 transition">{s.tag}</span>
               </div>
-              <h3 className="text-xl font-bold text-zinc-100 group-hover:text-purple-300 transition">{s.name}</h3>
-              <p className="text-zinc-400 text-sm mt-2 leading-relaxed">{s.desc}</p>
+              <h3 className="text-lg font-bold text-white group-hover:text-purple-300 transition">{s.name}</h3>
+              <p className="text-zinc-400 text-xs mt-2 leading-relaxed">{s.desc}</p>
+              
+              {/* Bottom Tags */}
+              <div className="flex gap-2 mt-6 pt-4 border-t border-zinc-900/80">
+                <span className="text-[9px] font-mono text-zinc-500 bg-zinc-900/80 px-2 py-0.5 rounded border border-zinc-800">SHORTS</span>
+                <span className="text-[9px] font-mono text-zinc-500 bg-zinc-900/80 px-2 py-0.5 rounded border border-zinc-800">REELS</span>
+                <span className="text-[9px] font-mono text-zinc-500 bg-zinc-900/80 px-2 py-0.5 rounded border border-zinc-800">PACING</span>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Workflow Timeline Section */}
-      <section className="max-w-6xl mx-auto px-6 py-16 border-t border-zinc-900">
+      {/* Production Stage / Process Timeline */}
+      <section className="max-w-5xl mx-auto px-6 py-16 border-t border-zinc-900">
         <div className="mb-10">
-          <p className="text-xs font-mono text-purple-400 uppercase tracking-widest">PRODUCTION // 02</p>
-          <h2 className="text-3xl font-extrabold text-white mt-2">Footage in, <span className="text-purple-400">advancement out.</span></h2>
-          <p className="text-zinc-400 text-sm mt-1">Four stages. You always know where your project is sitting.</p>
+          <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest">PRODUCTION // 02</p>
+          <h2 className="text-3xl font-bold text-white mt-2">
+            Footage in, <span className="text-purple-400 glow-purple-text">advancement out.</span>
+          </h2>
+          <p className="text-zinc-400 text-xs mt-1">Four stages. You always know which one your video is sitting in.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {/* Horizontal Timeline */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
           {[
-            { step: "01", title: "Blueprint", desc: "Brief, references and raw assets agreed upon." },
-            { step: "02", title: "First Cut", desc: "Rough assembly, sound design, and main pacing." },
-            { step: "03", title: "Polish", desc: "Color grading, micro-pacing, and effect pass." },
-            { step: "04", title: "Master Out", desc: "Final 4K export delivered on schedule." }
+            { step: "01 // BRIEF", title: "Blueprint", desc: "You send raw files, audio and references. We agree the shape of the video before a single cut is made." },
+            { step: "02 // DRAFTING", title: "First cut", desc: "Rough assembly, narrative pruning, sound effects and motion graphics laid straight into the timeline." },
+            { step: "03 // PRODUCTION", title: "Polish", desc: "Micro-pacing, colour, audio balance and a final sound pass. Revision notes land here." },
+            { step: "04 // DELIVERY", title: "Master out", desc: "4K60 master plus platform-ready exports, handed over on the agreed date with project files on request." }
           ].map((item, i) => (
-            <div key={i} className="bg-[#0b0910] border border-zinc-900 p-5 rounded-xl">
-              <span className="text-xs font-mono text-purple-500 font-bold">{item.step}</span>
-              <h4 className="text-base font-bold text-white mt-2">{item.title}</h4>
-              <p className="text-xs text-zinc-500 mt-1 leading-relaxed">{item.desc}</p>
+            <div key={i} className="flex flex-col justify-between bg-[#08070d] border border-zinc-800/60 p-5 rounded-xl">
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-5 h-5 rounded border border-purple-500/40 bg-purple-950/30 flex items-center justify-center text-[10px] text-purple-400 font-mono">📄</div>
+                  <span className="text-[9px] font-mono text-zinc-500">{item.step}</span>
+                </div>
+                <h4 className="text-sm font-bold text-white">{item.title}</h4>
+                <p className="text-xs text-zinc-400 mt-2 leading-relaxed">{item.desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Chat / Inquiry Modal */}
+      {/* Direct Order Ticket Modal */}
       {selectedCategory && (
-        <div className="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
-          <div className="bg-[#0e0c15] border border-zinc-800 rounded-2xl w-full max-w-2xl h-[580px] flex flex-col shadow-2xl overflow-hidden">
-            <div className="p-4 border-b border-zinc-800/80 flex justify-between items-center bg-[#08070d]">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
+          <div className="bg-[#0c0a12] border border-zinc-800 rounded-xl w-full max-w-xl h-[520px] flex flex-col shadow-2xl overflow-hidden">
+            <div className="p-4 border-b border-zinc-800 bg-[#08070d] flex justify-between items-center">
               <div>
-                <h3 className="font-bold text-white text-base">{selectedCategory}</h3>
-                <p className="text-xs text-zinc-500 font-mono">DIRECT INQUIRY CHANNEL</p>
+                <h3 className="font-bold text-white text-sm">{selectedCategory}</h3>
+                <p className="text-[10px] font-mono text-zinc-500">DIRECT CONSULTATION CHANNEL</p>
               </div>
               <div className="flex items-center gap-2">
                 {isAdmin && (
                   <button 
                     onClick={toggleCloseChat} 
-                    className={`text-xs px-3 py-1 rounded-md font-medium border ${isChatClosed ? 'bg-emerald-950 border-emerald-800 text-emerald-400' : 'bg-rose-950 border-rose-800 text-rose-400'}`}
+                    className={`text-[10px] font-mono px-2.5 py-1 rounded border ${isChatClosed ? 'bg-emerald-950 border-emerald-800 text-emerald-400' : 'bg-rose-950 border-rose-800 text-rose-400'}`}
                   >
-                    {isChatClosed ? 'Reopen' : 'Close Order'}
+                    {isChatClosed ? 'REOPEN' : 'CLOSE ORDER'}
                   </button>
                 )}
-                <button onClick={() => setSelectedCategory(null)} className="text-zinc-500 hover:text-white px-2 text-lg">✕</button>
+                <button onClick={() => setSelectedCategory(null)} className="text-zinc-500 hover:text-white px-2">✕</button>
               </div>
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-[#07060a]">
               {messages.length === 0 ? (
-                <div className="text-center text-zinc-600 text-xs font-mono py-16">
-                  No messages yet. Send a message to start your project discussion!
+                <div className="text-center text-zinc-600 text-xs font-mono py-12">
+                  No messages yet. Send your requirements to start the project.
                 </div>
               ) : (
                 messages.map((msg) => {
                   const isMe = msg.sender_email === user?.email;
                   return (
                     <div key={msg.id} className={`flex flex-col ${isMe ? 'items-end' : 'items-start'}`}>
-                      <span className="text-[10px] font-mono text-zinc-500 mb-1">{msg.sender_email}</span>
-                      <div className={`p-3 rounded-xl max-w-[80%] text-xs leading-relaxed ${isMe ? 'bg-purple-600 text-white' : 'bg-zinc-900 border border-zinc-800 text-zinc-200'}`}>
+                      <span className="text-[9px] font-mono text-zinc-500 mb-1">{msg.sender_email}</span>
+                      <div className={`p-3 rounded-lg max-w-[85%] text-xs leading-relaxed ${isMe ? 'bg-purple-600 text-white glow-button' : 'bg-zinc-900 border border-zinc-800 text-zinc-200'}`}>
                         {msg.message}
                       </div>
                     </div>
@@ -282,10 +311,10 @@ export default function Home() {
               )}
             </div>
 
-            <div className="p-4 border-t border-zinc-800/80 bg-[#08070d]">
+            <div className="p-3 border-t border-zinc-800 bg-[#08070d]">
               {isChatClosed ? (
-                <div className="text-center text-xs text-rose-400 py-2 bg-rose-950/30 border border-rose-900/50 rounded-lg">
-                  This inquiry has been closed by admin.
+                <div className="text-center text-xs text-rose-400 py-2 bg-rose-950/20 border border-rose-900/40 rounded">
+                  This inquiry ticket is closed.
                 </div>
               ) : (
                 <form onSubmit={sendMessage} className="flex gap-2">
@@ -293,10 +322,10 @@ export default function Home() {
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
-                    placeholder="Describe your requirements..."
-                    className="flex-1 bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2.5 text-xs text-white focus:outline-none focus:border-purple-600"
+                    placeholder="Write your requirement details..."
+                    className="flex-1 bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-600"
                   />
-                  <button type="submit" className="bg-purple-600 hover:bg-purple-500 text-white px-5 py-2.5 rounded-lg text-xs font-semibold">
+                  <button type="submit" className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded text-xs font-semibold glow-button">
                     Send
                   </button>
                 </form>
@@ -308,30 +337,30 @@ export default function Home() {
 
       {/* Auth Modal */}
       {isAuthModalOpen && (
-        <div className="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-50">
-          <div className="bg-[#0e0c15] border border-zinc-800 p-6 rounded-2xl w-full max-w-sm shadow-2xl">
-            <h3 className="text-lg font-bold text-white mb-1">Access Studio</h3>
-            <p className="text-xs text-zinc-500 mb-4">Login or register to open order tickets.</p>
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
+          <div className="bg-[#0c0a12] border border-zinc-800 p-6 rounded-xl w-full max-w-sm shadow-2xl">
+            <h3 className="text-base font-bold text-white mb-1">Sign In / Register</h3>
+            <p className="text-xs text-zinc-500 mb-4">Login to submit project requests and chat.</p>
             <div className="space-y-3">
               <input 
                 type="email" 
                 placeholder="Email address" 
                 value={email} 
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-purple-600"
+                className="w-full bg-zinc-950 border border-zinc-800 rounded p-2.5 text-xs text-white focus:outline-none focus:border-purple-600"
               />
               <input 
                 type="password" 
                 placeholder="Password" 
                 value={password} 
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-xs text-white focus:outline-none focus:border-purple-600"
+                onChange={(e) => setPassword(e.password || e.target.value)}
+                className="w-full bg-zinc-950 border border-zinc-800 rounded p-2.5 text-xs text-white focus:outline-none focus:border-purple-600"
               />
               <div className="flex gap-2 pt-2">
-                <button onClick={() => handleAuth('login')} className="flex-1 bg-purple-600 hover:bg-purple-500 text-white py-2.5 rounded-lg text-xs font-semibold">
+                <button onClick={() => handleAuth('login')} className="flex-1 bg-purple-600 hover:bg-purple-500 text-white py-2 rounded text-xs font-semibold glow-button">
                   Sign In
                 </button>
-                <button onClick={() => handleAuth('signup')} className="flex-1 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 py-2.5 rounded-lg text-xs font-semibold border border-zinc-800">
+                <button onClick={() => handleAuth('signup')} className="flex-1 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 py-2 rounded text-xs font-semibold border border-zinc-800">
                   Register
                 </button>
               </div>
