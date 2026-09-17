@@ -9,10 +9,10 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 const ADMIN_EMAIL = "exploiterwhite@gmail.com";
 
 const SERVICES = [
-  { id: "01", name: "Short-form editing", desc: "Shorts, Reels and TikTok. Hook-first structure, light sound design and pacing that survives the first swipe.", tag: "SPEED // 01" },
-  { id: "02", name: "Long-form editing", desc: "Full episodes and series. Multicam sync, narrative pruning, comedic timing and continuity across a season.", tag: "SERIES // 02" },
-  { id: "03", name: "Motion design", desc: "Typography, block wipes, map tracking, camera projection and HUD overlays built to match your channel.", tag: "GRAPHICS // 03" },
-  { id: "04", name: "Minecraft animation", desc: "Rigged characters, lit set-pieces, cinematic camera work and server reveal trailers rendered with shaders.", tag: "CINEMATIC // 04" }
+  { id: "01", name: "Short-form editing", desc: "Shorts, Reels and TikTok. Hook-first structure, light sound design and pacing that survives the first swipe.", tag: "SPEED // 01", badges: ["SHORTS", "REELS", "PACING"] },
+  { id: "02", name: "Long-form editing", desc: "Full episodes and series. Multicam sync, narrative pruning, comedic timing and continuity across a season.", tag: "SERIES // 02", badges: ["EPISODES", "EDITING", "TIMING"] },
+  { id: "03", name: "Motion design", desc: "Typography, block wipes, map tracking, camera projection and HUD overlays built to match your channel.", tag: "GRAPHICS // 03", badges: ["OVERLAYS", "EFFECTS", "TRACKING"] },
+  { id: "04", name: "Minecraft animation", desc: "Rigged characters, lit set-pieces, cinematic camera work and server reveal trailers rendered with shaders.", tag: "CINEMATIC // 04", badges: ["SHADERS", "TRAILERS", "3D RIGS"] }
 ];
 
 export default function Home() {
@@ -128,181 +128,189 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07060a] text-zinc-100 font-sans antialiased selection:bg-purple-600 selection:text-white">
-      {/* Header / Navbar */}
-      <nav className="border-b border-zinc-800/60 bg-[#09070e]/80 backdrop-blur-md sticky top-0 z-40 px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <div className="w-7 h-7 rounded bg-purple-600 flex items-center justify-center font-bold text-xs text-white glow-button">
+    <div style={{ backgroundColor: '#07060a', color: '#f4f4f5', minHeight: '100vh', paddingBottom: '60px' }}>
+      
+      {/* Top Navbar */}
+      <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px', borderBottom: '1px solid #1f1b2e', backgroundColor: '#09070e', position: 'sticky', top: 0, zIndex: 50 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ backgroundColor: '#9333ea', width: '28px', height: '28px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '12px', color: '#fff', boxShadow: '0 0 12px rgba(147, 51, 234, 0.6)' }}>
             K2
           </div>
-          <span className="font-semibold tracking-wider text-xs uppercase text-zinc-200">KYRO PROD</span>
+          <span style={{ fontWeight: '700', fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase', color: '#e4e4e7' }}>KYRO PROD</span>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div>
           {user ? (
-            <div className="flex items-center gap-3">
-              <span className="text-xs text-zinc-400 font-mono bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-md">
-                {user.email} {isAdmin && <span className="text-purple-400 font-bold">(ADMIN)</span>}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '11px', color: '#a1a1aa', fontFamily: 'monospace', backgroundColor: '#18181b', padding: '6px 12px', borderRadius: '6px', border: '1px solid #27272a' }}>
+                {user.email} {isAdmin && <span style={{ color: '#c084fc', fontWeight: 'bold' }}>(ADMIN)</span>}
               </span>
-              <button onClick={() => supabase.auth.signOut()} className="text-xs bg-zinc-900 hover:bg-zinc-800 text-zinc-300 px-3 py-1.5 rounded-md border border-zinc-800 transition">
+              <button onClick={() => supabase.auth.signOut()} style={{ fontSize: '11px', backgroundColor: '#18181b', color: '#d4d4d8', padding: '6px 12px', borderRadius: '6px', border: '1px solid #27272a', cursor: 'pointer' }}>
                 Sign Out
               </button>
             </div>
           ) : (
-            <button onClick={() => setIsAuthModalOpen(true)} className="bg-purple-600 hover:bg-purple-500 text-white text-xs font-medium px-4 py-1.5 rounded-md glow-button transition">
+            <button onClick={() => setIsAuthModalOpen(true)} style={{ backgroundColor: '#9333ea', color: '#fff', fontSize: '12px', fontWeight: '600', padding: '8px 16px', borderRadius: '6px', border: 'none', cursor: 'pointer', boxShadow: '0 0 15px rgba(147, 51, 234, 0.5)' }}>
               Sign In
             </button>
           )}
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="max-w-5xl mx-auto px-6 pt-20 pb-16">
-        <div className="text-[11px] font-mono tracking-widest text-zinc-500 uppercase mb-3 flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+      {/* Hero Header */}
+      <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '60px 24px 40px 24px' }}>
+        <p style={{ fontSize: '11px', fontFamily: 'monospace', letterSpacing: '2px', color: '#71717a', textTransform: 'uppercase', marginBottom: '12px' }}>
           MINECRAFT MEDIA PRODUCTION STUDIO
-        </div>
+        </p>
         
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white max-w-2xl leading-tight">
-          Edits that keep people <span className="text-purple-400 glow-purple-text">watching.</span>
+        <h1 style={{ fontSize: 'clamp(32px, 5vw, 56px)', fontWeight: '800', lineHeight: '1.1', maxWidth: '650px', margin: 0 }}>
+          Edits that keep people <span className="glow-purple" style={{ color: '#c084fc' }}>watching.</span>
         </h1>
         
-        <p className="text-zinc-400 text-xs md:text-sm max-w-md mt-4 leading-relaxed">
+        <p style={{ fontSize: '13px', color: '#a1a1aa', maxWidth: '450px', marginTop: '16px', lineHeight: '1.6' }}>
           Short-form, long-form, motion design and cinematics for Minecraft creators, servers and gaming brands.
         </p>
 
-        <div className="flex gap-3 mt-8">
-          <button className="bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold px-5 py-2.5 rounded-md glow-button transition">
+        <div style={{ display: 'flex', gap: '12px', marginTop: '24px' }}>
+          <button style={{ backgroundColor: '#9333ea', color: '#fff', fontSize: '12px', fontWeight: '600', padding: '10px 20px', borderRadius: '6px', border: 'none', cursor: 'pointer', boxShadow: '0 0 15px rgba(147, 51, 234, 0.4)' }}>
             SEE THE WORK →
           </button>
-          <button onClick={() => !user && setIsAuthModalOpen(true)} className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 text-xs font-semibold px-5 py-2.5 rounded-md transition">
+          <button onClick={() => !user && setIsAuthModalOpen(true)} style={{ backgroundColor: '#120f1d', color: '#d4d4d8', fontSize: '12px', fontWeight: '600', padding: '10px 20px', borderRadius: '6px', border: '1px solid #27272a', cursor: 'pointer' }}>
             START A PROJECT
           </button>
         </div>
 
         {/* Stats Row */}
-        <div className="grid grid-cols-3 gap-6 max-w-md mt-16 pt-8 border-t border-zinc-900">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', maxWidth: '450px', marginTop: '50px', paddingTop: '30px', borderTop: '1px solid #18181b' }}>
           <div>
-            <p className="text-2xl font-bold text-white tracking-tight">5,000,000+</p>
-            <p className="text-[10px] text-zinc-500 font-mono mt-1 uppercase">VIEWS GENERATED</p>
+            <div style={{ fontSize: '22px', fontWeight: '800', color: '#fff' }}>5,000,000+</div>
+            <div style={{ fontSize: '9px', fontFamily: 'monospace', color: '#71717a', marginTop: '4px' }}>VIEWS GENERATED</div>
           </div>
           <div>
-            <p className="text-2xl font-bold text-white tracking-tight">3.5+</p>
-            <p className="text-[10px] text-zinc-500 font-mono mt-1 uppercase">YEARS EDITING</p>
+            <div style={{ fontSize: '22px', fontWeight: '800', color: '#fff' }}>3.5+</div>
+            <div style={{ fontSize: '9px', fontFamily: 'monospace', color: '#71717a', marginTop: '4px' }}>YEARS EDITING</div>
           </div>
           <div>
-            <p className="text-2xl font-bold text-white tracking-tight">99+</p>
-            <p className="text-[10px] text-zinc-500 font-mono mt-1 uppercase">ZONES DELIVERED</p>
+            <div style={{ fontSize: '22px', fontWeight: '800', color: '#fff' }}>99+</div>
+            <div style={{ fontSize: '9px', fontFamily: 'monospace', color: '#71717a', marginTop: '4px' }}>ZONES DELIVERED</div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Services Section */}
-      <section className="max-w-5xl mx-auto px-6 py-12">
-        <div className="mb-8">
-          <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest">DISCIPLINES // 01</p>
-          <h2 className="text-3xl font-bold text-white mt-2">
-            Four ways we <span className="text-purple-400 glow-purple-text">cut.</span>
+      {/* Services Grid (Four ways we cut) */}
+      <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '20px 24px' }}>
+        <div style={{ marginBottom: '24px' }}>
+          <p style={{ fontSize: '10px', fontFamily: 'monospace', color: '#a1a1aa', letterSpacing: '2px', margin: 0 }}>DISCIPLINES // 01</p>
+          <h2 style={{ fontSize: '28px', fontWeight: '800', margin: '6px 0' }}>
+            Four ways we <span className="glow-purple" style={{ color: '#c084fc' }}>cut.</span>
           </h2>
-          <p className="text-zinc-400 text-xs mt-1">
+          <p style={{ fontSize: '12px', color: '#a1a1aa', margin: 0 }}>
             Each discipline is its own pipeline, with its own reference library and its own delivery spec.
           </p>
         </div>
 
         {/* 2x2 Dark Grid Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
           {SERVICES.map((s) => (
             <div 
               key={s.id}
               onClick={() => handleServiceClick(s.name)}
-              className="group bg-[#0b0912] border border-zinc-800/80 hover:border-purple-600/50 p-6 rounded-xl cursor-pointer transition-all duration-200 glow-purple-box relative"
+              style={{
+                backgroundColor: '#0c0a14',
+                border: '1px solid #221c35',
+                borderRadius: '12px',
+                padding: '24px',
+                cursor: 'pointer',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+                transition: 'all 0.2s ease'
+              }}
             >
-              <div className="flex justify-between items-center mb-6">
-                <div className="w-8 h-8 rounded bg-purple-950/50 border border-purple-800/50 flex items-center justify-center text-purple-400 text-xs">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '6px', backgroundColor: '#1e1438', border: '1px solid #3b2768', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#c084fc', fontSize: '12px' }}>
                   ⚡
                 </div>
-                <span className="text-[10px] font-mono text-zinc-600 group-hover:text-purple-400 transition">{s.tag}</span>
+                <span style={{ fontSize: '10px', fontFamily: 'monospace', color: '#71717a' }}>{s.tag}</span>
               </div>
-              <h3 className="text-lg font-bold text-white group-hover:text-purple-300 transition">{s.name}</h3>
-              <p className="text-zinc-400 text-xs mt-2 leading-relaxed">{s.desc}</p>
               
-              {/* Bottom Tags */}
-              <div className="flex gap-2 mt-6 pt-4 border-t border-zinc-900/80">
-                <span className="text-[9px] font-mono text-zinc-500 bg-zinc-900/80 px-2 py-0.5 rounded border border-zinc-800">SHORTS</span>
-                <span className="text-[9px] font-mono text-zinc-500 bg-zinc-900/80 px-2 py-0.5 rounded border border-zinc-800">REELS</span>
-                <span className="text-[9px] font-mono text-zinc-500 bg-zinc-900/80 px-2 py-0.5 rounded border border-zinc-800">PACING</span>
+              <h3 style={{ fontSize: '18px', fontWeight: '700', color: '#ffffff', margin: '0 0 8px 0' }}>{s.name}</h3>
+              <p style={{ fontSize: '12px', color: '#a1a1aa', lineHeight: '1.6', margin: 0 }}>{s.desc}</p>
+              
+              <div style={{ display: 'flex', gap: '6px', marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #161224' }}>
+                {s.badges.map((b, i) => (
+                  <span key={i} style={{ fontSize: '8px', fontFamily: 'monospace', color: '#71717a', backgroundColor: '#120f1d', padding: '4px 8px', borderRadius: '4px', border: '1px solid #1f1b2e' }}>
+                    {b}
+                  </span>
+                ))}
               </div>
             </div>
           ))}
         </div>
-      </section>
+      </div>
 
       {/* Production Stage / Process Timeline */}
-      <section className="max-w-5xl mx-auto px-6 py-16 border-t border-zinc-900">
-        <div className="mb-10">
-          <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest">PRODUCTION // 02</p>
-          <h2 className="text-3xl font-bold text-white mt-2">
-            Footage in, <span className="text-purple-400 glow-purple-text">advancement out.</span>
+      <div style={{ maxWidth: '1000px', margin: '40px auto 0 auto', padding: '40px 24px 0 24px', borderTop: '1px solid #18181b' }}>
+        <div style={{ marginBottom: '30px' }}>
+          <p style={{ fontSize: '10px', fontFamily: 'monospace', color: '#a1a1aa', letterSpacing: '2px', margin: 0 }}>PRODUCTION // 02</p>
+          <h2 style={{ fontSize: '28px', fontWeight: '800', margin: '6px 0' }}>
+            Footage in, <span className="glow-purple" style={{ color: '#c084fc' }}>advancement out.</span>
           </h2>
-          <p className="text-zinc-400 text-xs mt-1">Four stages. You always know which one your video is sitting in.</p>
+          <p style={{ fontSize: '12px', color: '#a1a1aa', margin: 0 }}>Four stages. You always know which one your video is sitting in.</p>
         </div>
 
-        {/* Horizontal Timeline */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+        {/* Timeline Row */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
           {[
             { step: "01 // BRIEF", title: "Blueprint", desc: "You send raw files, audio and references. We agree the shape of the video before a single cut is made." },
             { step: "02 // DRAFTING", title: "First cut", desc: "Rough assembly, narrative pruning, sound effects and motion graphics laid straight into the timeline." },
             { step: "03 // PRODUCTION", title: "Polish", desc: "Micro-pacing, colour, audio balance and a final sound pass. Revision notes land here." },
             { step: "04 // DELIVERY", title: "Master out", desc: "4K60 master plus platform-ready exports, handed over on the agreed date with project files on request." }
           ].map((item, i) => (
-            <div key={i} className="flex flex-col justify-between bg-[#08070d] border border-zinc-800/60 p-5 rounded-xl">
-              <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="w-5 h-5 rounded border border-purple-500/40 bg-purple-950/30 flex items-center justify-center text-[10px] text-purple-400 font-mono">📄</div>
-                  <span className="text-[9px] font-mono text-zinc-500">{item.step}</span>
-                </div>
-                <h4 className="text-sm font-bold text-white">{item.title}</h4>
-                <p className="text-xs text-zinc-400 mt-2 leading-relaxed">{item.desc}</p>
+            <div key={i} style={{ backgroundColor: '#09070f', border: '1px solid #1d182b', padding: '16px', borderRadius: '10px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '10px' }}>
+                <div style={{ width: '18px', height: '18px', borderRadius: '4px', backgroundColor: '#1e1438', border: '1px solid #3b2768', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', color: '#c084fc' }}>📄</div>
+                <span style={{ fontSize: '9px', fontFamily: 'monospace', color: '#71717a' }}>{item.step}</span>
               </div>
+              <h4 style={{ fontSize: '14px', fontWeight: '700', color: '#fff', margin: '0 0 6px 0' }}>{item.title}</h4>
+              <p style={{ fontSize: '11px', color: '#a1a1aa', lineHeight: '1.5', margin: 0 }}>{item.desc}</p>
             </div>
           ))}
         </div>
-      </section>
+      </div>
 
       {/* Direct Order Ticket Modal */}
       {selectedCategory && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
-          <div className="bg-[#0c0a12] border border-zinc-800 rounded-xl w-full max-w-xl h-[520px] flex flex-col shadow-2xl overflow-hidden">
-            <div className="p-4 border-b border-zinc-800 bg-[#08070d] flex justify-between items-center">
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', zIndex: 100 }}>
+          <div style={{ backgroundColor: '#0c0a12', border: '1px solid #27272a', borderRadius: '12px', width: '100%', maxWidth: '550px', height: '500px', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+            <div style={{ padding: '16px', borderBottom: '1px solid #27272a', backgroundColor: '#08070d', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <h3 className="font-bold text-white text-sm">{selectedCategory}</h3>
-                <p className="text-[10px] font-mono text-zinc-500">DIRECT CONSULTATION CHANNEL</p>
+                <h3 style={{ fontSize: '14px', fontWeight: 'bold', color: '#fff', margin: 0 }}>{selectedCategory}</h3>
+                <p style={{ fontSize: '10px', fontFamily: 'monospace', color: '#71717a', margin: 0 }}>DIRECT CONSULTATION CHANNEL</p>
               </div>
-              <div className="flex items-center gap-2">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 {isAdmin && (
                   <button 
                     onClick={toggleCloseChat} 
-                    className={`text-[10px] font-mono px-2.5 py-1 rounded border ${isChatClosed ? 'bg-emerald-950 border-emerald-800 text-emerald-400' : 'bg-rose-950 border-rose-800 text-rose-400'}`}
+                    style={{ fontSize: '10px', fontFamily: 'monospace', padding: '4px 8px', borderRadius: '4px', border: '1px solid #3f3f46', backgroundColor: isChatClosed ? '#064e3b' : '#881337', color: '#fff', cursor: 'pointer' }}
                   >
                     {isChatClosed ? 'REOPEN' : 'CLOSE ORDER'}
                   </button>
                 )}
-                <button onClick={() => setSelectedCategory(null)} className="text-zinc-500 hover:text-white px-2">✕</button>
+                <button onClick={() => setSelectedCategory(null)} style={{ background: 'none', border: 'none', color: '#71717a', fontSize: '16px', cursor: 'pointer' }}>✕</button>
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-[#07060a]">
+            <div style={{ flex: 1, overflowY: 'auto', padding: '16px', backgroundColor: '#07060a', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {messages.length === 0 ? (
-                <div className="text-center text-zinc-600 text-xs font-mono py-12">
+                <div style={{ textAlign: 'center', color: '#52525b', fontSize: '12px', fontFamily: 'monospace', paddingTop: '40px' }}>
                   No messages yet. Send your requirements to start the project.
                 </div>
               ) : (
                 messages.map((msg) => {
                   const isMe = msg.sender_email === user?.email;
                   return (
-                    <div key={msg.id} className={`flex flex-col ${isMe ? 'items-end' : 'items-start'}`}>
-                      <span className="text-[9px] font-mono text-zinc-500 mb-1">{msg.sender_email}</span>
-                      <div className={`p-3 rounded-lg max-w-[85%] text-xs leading-relaxed ${isMe ? 'bg-purple-600 text-white glow-button' : 'bg-zinc-900 border border-zinc-800 text-zinc-200'}`}>
+                    <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: isMe ? 'flex-end' : 'flex-start' }}>
+                      <span style={{ fontSize: '9px', fontFamily: 'monospace', color: '#52525b', marginBottom: '2px' }}>{msg.sender_email}</span>
+                      <div style={{ padding: '10px 14px', borderRadius: '8px', maxWidth: '80%', fontSize: '12px', backgroundColor: isMe ? '#9333ea' : '#18181b', color: '#fff', border: isMe ? 'none' : '1px solid #27272a' }}>
                         {msg.message}
                       </div>
                     </div>
@@ -311,21 +319,21 @@ export default function Home() {
               )}
             </div>
 
-            <div className="p-3 border-t border-zinc-800 bg-[#08070d]">
+            <div style={{ padding: '12px', borderTop: '1px solid #27272a', backgroundColor: '#08070d' }}>
               {isChatClosed ? (
-                <div className="text-center text-xs text-rose-400 py-2 bg-rose-950/20 border border-rose-900/40 rounded">
+                <div style={{ textAlign: 'center', fontSize: '12px', color: '#f43f5e', padding: '8px', backgroundColor: '#4c0519', border: '1px solid #881337', borderRadius: '6px' }}>
                   This inquiry ticket is closed.
                 </div>
               ) : (
-                <form onSubmit={sendMessage} className="flex gap-2">
+                <form onSubmit={sendMessage} style={{ display: 'flex', gap: '8px' }}>
                   <input
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                     placeholder="Write your requirement details..."
-                    className="flex-1 bg-zinc-950 border border-zinc-800 rounded px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-600"
+                    style={{ flex: 1, backgroundColor: '#07060a', border: '1px solid #27272a', borderRadius: '6px', padding: '8px 12px', fontSize: '12px', color: '#fff', outline: 'none' }}
                   />
-                  <button type="submit" className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded text-xs font-semibold glow-button">
+                  <button type="submit" style={{ backgroundColor: '#9333ea', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '6px', fontSize: '12px', fontWeight: '600', cursor: 'pointer' }}>
                     Send
                   </button>
                 </form>
@@ -337,34 +345,34 @@ export default function Home() {
 
       {/* Auth Modal */}
       {isAuthModalOpen && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
-          <div className="bg-[#0c0a12] border border-zinc-800 p-6 rounded-xl w-full max-w-sm shadow-2xl">
-            <h3 className="text-base font-bold text-white mb-1">Sign In / Register</h3>
-            <p className="text-xs text-zinc-500 mb-4">Login to submit project requests and chat.</p>
-            <div className="space-y-3">
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px', zIndex: 100 }}>
+          <div style={{ backgroundColor: '#0c0a12', border: '1px solid #27272a', borderRadius: '12px', width: '100%', maxWidth: '350px', padding: '24px' }}>
+            <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#fff', margin: '0 0 4px 0' }}>Sign In / Register</h3>
+            <p style={{ fontSize: '11px', color: '#71717a', margin: '0 0 16px 0' }}>Login to submit project requests and chat.</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <input 
                 type="email" 
                 placeholder="Email address" 
                 value={email} 
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded p-2.5 text-xs text-white focus:outline-none focus:border-purple-600"
+                style={{ backgroundColor: '#07060a', border: '1px solid #27272a', borderRadius: '6px', padding: '10px', fontSize: '12px', color: '#fff', outline: 'none' }}
               />
               <input 
                 type="password" 
                 placeholder="Password" 
                 value={password} 
-                onChange={(e) => setPassword(e.password || e.target.value)}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded p-2.5 text-xs text-white focus:outline-none focus:border-purple-600"
+                onChange={(e) => setPassword(e.target.value)}
+                style={{ backgroundColor: '#07060a', border: '1px solid #27272a', borderRadius: '6px', padding: '10px', fontSize: '12px', color: '#fff', outline: 'none' }}
               />
-              <div className="flex gap-2 pt-2">
-                <button onClick={() => handleAuth('login')} className="flex-1 bg-purple-600 hover:bg-purple-500 text-white py-2 rounded text-xs font-semibold glow-button">
+              <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+                <button onClick={() => handleAuth('login')} style={{ flex: 1, backgroundColor: '#9333ea', color: '#fff', border: 'none', padding: '8px', borderRadius: '6px', fontSize: '12px', fontWeight: '600', cursor: 'pointer' }}>
                   Sign In
                 </button>
-                <button onClick={() => handleAuth('signup')} className="flex-1 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 py-2 rounded text-xs font-semibold border border-zinc-800">
+                <button onClick={() => handleAuth('signup')} style={{ flex: 1, backgroundColor: '#18181b', color: '#d4d4d8', border: '1px solid #27272a', padding: '8px', borderRadius: '6px', fontSize: '12px', fontWeight: '600', cursor: 'pointer' }}>
                   Register
                 </button>
               </div>
-              <button onClick={() => setIsAuthModalOpen(false)} className="w-full text-xs text-zinc-500 mt-2 hover:text-zinc-300">
+              <button onClick={() => setIsAuthModalOpen(false)} style={{ background: 'none', border: 'none', color: '#71717a', fontSize: '11px', marginTop: '8px', cursor: 'pointer' }}>
                 Cancel
               </button>
             </div>
@@ -373,5 +381,4 @@ export default function Home() {
       )}
     </div>
   );
-          }
-                
+}
